@@ -1,68 +1,38 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  /* 🎨 Sampled Colors from your Image */
+  --bg-deep: #0B0E14; /* The very dark background */
+  --bg-navy: #151A25; /* The slightly lighter distinct background */
+  
+  /* 🪟 The Glass Surface */
+  --glass-bg: rgba(21, 26, 37, 0.7); /* Deep Navy Glass */
+  --glass-border: rgba(255, 255, 255, 0.08);
+  
+  /* ✨ The Glows */
+  --glow-gold: #D97706; /* The Amber/Gold Light */
+  --glow-cyan: #06B6D4; /* The Cyan Accents */
+  
+  /* 🔵 The Gradients */
+  --btn-gradient: linear-gradient(90deg, #0e7490, #06b6d4); /* Matches "New Resume" button */
+  --gold-gradient: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.5), transparent);
+  
+  /* 📝 Text */
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(217, 119, 6, 0.05) 0%, transparent 40%);
+  color: var(--text-main);
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
