@@ -28,6 +28,12 @@ const EditorPanel = ({ resumeData = {}, setResumeData, addCustomSection }) => {
         setResumeData({ ...resumeData, [section]: updated });
     }
 
+    // To remove custom section
+    const removeCustomSection = (index) => {
+        const updated = resumeData.customSections.filter((_, i) => i != index);
+        setResumeData({...resumeData, customSections: updated});
+    }
+
     return (
         <section className="editor-panel">
             <div className="panel-title">
@@ -87,9 +93,9 @@ const EditorPanel = ({ resumeData = {}, setResumeData, addCustomSection }) => {
                 <button className="add-btn" onClick={() => addItem("projects", { project: "", projectDesc: "" })}>+ Add Project</button>
             </SectionCard>
 
-            {/* General logic to add a new section */}
+            {/* General logic to add/remove a new section */}
             {resumeData.customSections.map((sec, secIndex) => (
-                <SectionCard key={secIndex} title={sec.title || "New Section"}>
+                <SectionCard key={secIndex} title={sec.title || "New Section"} onRemove={() => removeCustomSection(secIndex)}>
                     <input placeholder="Section Title" value={sec.title} onChange={(e) => updateArrayField("customSections", secIndex, "title", e.target.value)}></input>
                     {sec.items.map((item, itemIndex) => (
                         <textarea key={itemIndex} placeholder="Enter details" value={item} onChange={(e) => {
