@@ -7,7 +7,7 @@ import Sidebar from "./componenets/Sidebar";
 import EditorPanel from "./componenets/EditorPanel";
 import PreviewPanel from "./componenets/PreviewPanel";
 import "./App.css";
-import "./Editor.css";
+import "./components/Editor.css";
 
 const Editor = () => {
 
