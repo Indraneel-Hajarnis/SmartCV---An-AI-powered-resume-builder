@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-
-import Navbar from "./components/Navbar";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProjectChoice from "./pages/ProjectChoice";
 import TemplateSelect from "./pages/TemplateSelect";
@@ -48,5 +46,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
+// comment for testing
 export default App;
