@@ -252,6 +252,7 @@
    PAGE HEADER
 ----------------------------------------- */
 .workspace-header {
+  text-align: center;
   margin-bottom: 3rem;
   width: 100%;
   max-width: 100%;
@@ -269,6 +270,8 @@
 }
 
 .workspace-header p {
+  margin-left: auto;
+  margin-right: auto;
   color: var(--text-muted);
   max-width: 700px;
   font-size: 1.1rem;
@@ -474,7 +477,8 @@
 
 .workspace-container {
   width: 100%;
-  max-width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .resume-grid {
@@ -487,8 +491,8 @@
 }
 
 .create-new-container {
-  width: 75%;
-  max-width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .resume-card {
@@ -502,6 +506,11 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+}
+
+.create-new-container .resume-card {
+  max-width: 800px;
+  width: 100%;
 }
 
 .resume-card::before {
