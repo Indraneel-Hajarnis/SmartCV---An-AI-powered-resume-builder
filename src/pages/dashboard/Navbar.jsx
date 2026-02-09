@@ -1,24 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth"; // Added signOut
-import { LogOut } from "lucide-react"; // Nice icon for logout
+import axios from "axios";
+import { LogOut } from "lucide-react";
 import "./dashboard.css";
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
+    let isMounted = true;
+
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/auth/me`, {
+          withCredentials: true,
+        });
+        if (isMounted) {
+          setUser(res.data);
+        }
+      } catch {
+        if (isMounted) {
+          setUser(null);
+        }
+      }
+    };
+
+    fetchUser();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await axios.post(
+        `${API_BASE_URL}/auth/logout`,
+        {},
+        { withCredentials: true }
+      );
+      setUser(null);
       navigate("/login");
     } catch (error) {
       console.error("Error signing out: ", error);
@@ -39,28 +63,17 @@ const Navbar = () => {
         <div className="nav-actions">
           {user ? (
             <div className="user-profile-wrapper">
-              {" "}
-              {/* New wrapper for hover logic */}
               <div className="user-profile-nav">
                 <span className="user-name-label">
-                  {user.displayName ||
+                  {user.username ||
                     (user.email ? user.email.split("@")[0] : "User")}
                 </span>
                 <div className="profile-circle-container">
-                  {user.photoURL ? (
-                    <img
-                      src={user.photoURL}
-                      alt="avatar"
-                      className="nav-avatar-img"
-                    />
-                  ) : (
-                    <span className="profile-initial">
-                      {user.email?.charAt(0).toUpperCase()}
-                    </span>
-                  )}
+                  <span className="profile-initial">
+                    {user.email?.charAt(0).toUpperCase()}
+                  </span>
                 </div>
               </div>
-              {/* DROPDOWN MENU */}
               <div className="profile-dropdown">
                 <div className="dropdown-item" onClick={handleLogout}>
                   <LogOut size={16} />
